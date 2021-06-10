@@ -9,10 +9,12 @@ class Clock {
 
     this.date = new Date();
     this.time = this.date.getTime();
+    this.seconds = this.date.getSeconds();
+    this.minutes = this.date.getMinutes();
+    this.hours = this.date.getHours();
+
     this.printTime();
-    // setInterval(this._tick.bind(this), 1000);
-    console.log(this.date.getUTCHours());
-    console.log(this.date.getHours());
+    setInterval(this._tick.bind(this), 1000);
 
   }
 
@@ -20,7 +22,14 @@ class Clock {
     // Format the time in HH:MM:SS
     // Use console.log to print it.
     
-    console.log(this.time);
+    let time = "";
+    time = time.concat(this.hours.toString());
+    time = time.concat(":");
+    time = time.concat(this.minutes.toString());
+    time = time.concat(":");
+    time = time.concat(this.seconds.toString());
+
+    console.log(time);
     // debugger
   }
 
@@ -28,10 +37,22 @@ class Clock {
     // 1. Increment the time by one second.
     // 2. Call printTime.
     // debugger
-    this.time += 1000;
+    this.seconds += 1;
+    if (this.seconds === 60) {
+      this.seconds = 0;
+      this.minutes += 1;
+    }
+    if (this.minutes === 60) {
+      this.minutes = 0;
+      this.hours += 1;
+    }
+    if (this.hours === 24) {
+      this.hours = 0;
+    }
+
     this.printTime();
   }
 }
 
-const clock = new Clock();
+// const clock = new Clock();
 
